@@ -10,6 +10,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.10",
+    "@prisma/client": "5.17.0",
     "joi": "^17.13.3"
   },
   "devDependencies": {
