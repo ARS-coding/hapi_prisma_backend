@@ -1,7 +1,7 @@
 export function createFavorite(post_id: string, user_id: string) {
-  return "postPost";
+  return "createFavorite";
 }
 
-export function deleleteFavorite(post_id: string, user_id: string) {
-  return "getRecentPosts";
+export function deleteFavorite(post_id: string, user_id: string) {
+  return "deleteFavorite";
 }
