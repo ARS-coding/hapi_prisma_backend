@@ -1,7 +1,7 @@
 {
   "name": "app_nation_case_study_backend",
   "version": "1.0.0",
-  "description": "App nation case study's monolithic NodeJS backend application.",
+  "description": "AppNation's case study. Monolithic NodeJS backend application using HapiJS and Prisma .",
   "license": "ISC",
   "scripts": {
     "dev": "ts-node-dev --respawn ./src/index.ts",
