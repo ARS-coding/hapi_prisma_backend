@@ -1,3 +1,5 @@
+import { prisma } from "../prisma";
+
 export function postPost(title: string, content: string, user_id: string) {
   return "postPost";
 }

@@ -1,3 +1,5 @@
+import { prisma } from "../prisma";
+
 export function createFavorite(post_id: string, user_id: string) {
   return "createFavorite";
 }

@@ -1,3 +1,5 @@
+import { prisma } from "../prisma";
+
 export function createUser(firstName: string, lastName: string, email: string, password: string) {
   return "signUp";
 }
