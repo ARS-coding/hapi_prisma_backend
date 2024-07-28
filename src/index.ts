@@ -1,7 +1,7 @@
 "use strict";
 
 import Hapi from "@hapi/hapi";
-import { statusPlugin } from "./plugins/status";
+import * as plugins from "./plugins";
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
@@ -14,7 +14,7 @@ const server = Hapi.server({
 });
 
 async function registerServerPlugins() {
-  server.register([statusPlugin]);
+  await server.register(Object.values(plugins));
   return server;
 }
 
