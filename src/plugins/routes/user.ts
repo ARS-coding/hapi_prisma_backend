@@ -36,7 +36,7 @@ export const userPlugin: Hapi.Plugin<undefined> = {
     try {
       server.route(USER_ROUTES);
     } catch (err) {
-      console.error("An error occurred while registering status plugin: ", err);
+      console.error("An error occurred while registering 'user' plugin: ", err);
     }
   },
 };
