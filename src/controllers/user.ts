@@ -1,6 +1,6 @@
 import Hapi, { Request, ResponseToolkit } from "@hapi/hapi";
 
-import * as UserService from "../service/user";
+import * as UserService from "../services/user";
 // use joi to validate the schema, look into doing that in the route creating option part instead of on the controller
 
 export function signUp(req: Request, h: ResponseToolkit) {
