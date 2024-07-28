@@ -10,13 +10,17 @@ declare module "@hapi/hapi" {
 export const prismaPlugin: Hapi.Plugin<undefined> = {
   name: "prisma",
   register: async function (server: Hapi.Server) {
-    server.app.prisma = new PrismaClient();
+    try {
+      server.app.prisma = new PrismaClient();
 
-    server.ext({
-      type: "onPostStop",
-      method: async (server: Hapi.Server) => {
-        server.app.prisma.$disconnect();
-      },
-    });
+      server.ext({
+        type: "onPostStop",
+        method: async (server: Hapi.Server) => {
+          server.app.prisma.$disconnect();
+        },
+      });
+    } catch (err) {
+      console.error("There was an error registering prisma plugin: ", err);
+    }
   },
 };
