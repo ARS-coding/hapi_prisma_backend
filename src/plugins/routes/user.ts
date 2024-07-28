@@ -14,6 +14,11 @@ const USER_ROUTES: ServerRoute[] = [
     handler: UserController.signIn,
   },
   {
+    method: "POST",
+    path: "/user/sign-out",
+    handler: UserController.signOut,
+  },
+  {
     method: "GET",
     path: "/user/{user_id}",
     handler: UserController.getUser,

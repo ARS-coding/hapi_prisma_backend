@@ -11,6 +11,10 @@ export function signIn(req: Request, h: ResponseToolkit) {
   //   return UserService.signIn;
 }
 
+export function signOut(req: Request, h: ResponseToolkit) {
+  //   return UserService.signOut;
+}
+
 export function getUser(req: Request, h: ResponseToolkit) {
   //   return UserService.getUser;
 }

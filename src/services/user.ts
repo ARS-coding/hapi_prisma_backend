@@ -8,6 +8,8 @@ export function signIn(email: string, password: string) {
   //   return UserDataAccess.getUser
 }
 
+export function signOut(email: string, password: string) {}
+
 export function getUser(user_id: string) {
   //   return UserDataAccess.getUser
 }
