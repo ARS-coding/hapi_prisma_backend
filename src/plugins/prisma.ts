@@ -1,9 +1,9 @@
 import Hapi from "@hapi/hapi";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../prisma";
 
 declare module "@hapi/hapi" {
   interface ServerApplicationState {
-    prisma: PrismaClient;
+    prisma: typeof prisma;
   }
 }
 
@@ -11,7 +11,7 @@ export const prismaPlugin: Hapi.Plugin<undefined> = {
   name: "prisma",
   register: async function (server: Hapi.Server) {
     try {
-      server.app.prisma = new PrismaClient();
+      server.app.prisma = prisma;
 
       server.ext({
         type: "onPostStop",
