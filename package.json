@@ -5,7 +5,10 @@
   "license": "ISC",
   "scripts": {
     "dev": "ts-node-dev --respawn ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postgres:start": "docker-compose up -d",
+    "prisma:generate": "prisma generate",
+    "migrate:save": "prisma migrate --experimental save"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
