@@ -11,21 +11,47 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  firstName String
-  lastName  String
-  posts     Post[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int        @id @default(autoincrement())
+  email     String     @unique @db.VarChar(200)
+  firstName String     @db.VarChar(100)
+  lastName  String     @db.VarChar(100)
+  Posts     Post[]
+  Likes     Like[]
+  Favorites Favorite[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(200)
-  content   String   @db.VarChar(500)
-  userId    Int   
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int        @id @default(autoincrement())
+  title     String     @db.VarChar(200)
+  content   String     @db.VarChar(500)
+  userId    Int
+  Author    User       @relation(fields: [userId], references: [id])
+  Likes     Like[]
+  Favorites Favorite[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Like {
+  userId       Int
+  UserWhoLiked User     @relation(fields: [userId], references: [id])
+  postId       Int
+  LikedPost    Post     @relation(fields: [postId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@id(name: "id", [postId, userId])
+}
+
+model Favorite {
+  userId           Int
+  UserWhoFavorited User     @relation(fields: [userId], references: [id])
+  postId           Int
+  FavoritedPost    Post     @relation(fields: [postId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@id(name: "id", [postId, userId])
 }
