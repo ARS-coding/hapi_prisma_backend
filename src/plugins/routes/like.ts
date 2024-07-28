@@ -15,7 +15,7 @@ const LIKE_ROUTES: ServerRoute[] = [
   },
 ];
 
-export const favoritePlugin: Hapi.Plugin<undefined> = {
+export const likePlugin: Hapi.Plugin<undefined> = {
   name: "like",
   register: async function (server: Hapi.Server) {
     try {
