@@ -11,9 +11,11 @@
     "migrate:save": "prisma migrate --experimental save"
   },
   "dependencies": {
+    "@hapi/basic": "^7.0.2",
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.10",
     "@prisma/client": "5.17.0",
+    "bcrypt": "^5.1.1",
     "joi": "^17.13.3"
   },
   "devDependencies": {
