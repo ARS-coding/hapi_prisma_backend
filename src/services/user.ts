@@ -5,13 +5,13 @@ export function signUp(firstName: string, lastName: string, email: string, passw
 }
 
 export function signIn(email: string, password: string) {
-  //   return UserDataAccess.getUser
+  //   return UserDataAccess.getUserByEmail
 }
 
 export function signOut(email: string, password: string) {}
 
 export function getUser(user_id: string) {
-  //   return UserDataAccess.getUser
+  //   return UserDataAccess.getUserById
 }
 
 export function patchUser(user_id: string) {

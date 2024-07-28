@@ -4,7 +4,11 @@ export function createUser(firstName: string, lastName: string, email: string, p
   return "signUp";
 }
 
-export function getUser(user_id: string) {
+export function getUserById(user_id: string) {
+  return "getUser";
+}
+
+export function getUserByEmail(user_id: string) {
   return "getUser";
 }
 
