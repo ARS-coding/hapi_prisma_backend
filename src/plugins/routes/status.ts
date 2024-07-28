@@ -7,6 +7,9 @@ const STATUS_ROUTES: ServerRoute[] = [
     handler: (req: Hapi.Request, h: Hapi.ResponseToolkit) => {
       return h.response({ up: true }).code(200);
     },
+    options: {
+      auth: false,
+    },
   },
 ];
 

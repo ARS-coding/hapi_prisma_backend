@@ -7,11 +7,13 @@ const USER_ROUTES: ServerRoute[] = [
     method: "POST",
     path: "/user/sign-up",
     handler: UserController.signUp,
+    options: { auth: false },
   },
   {
     method: "POST",
     path: "/user/sign-in",
     handler: UserController.signIn,
+    options: { auth: false },
   },
   {
     method: "POST",
