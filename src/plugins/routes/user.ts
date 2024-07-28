@@ -32,6 +32,7 @@ const USER_ROUTES: ServerRoute[] = [
 
 export const userPlugin: Hapi.Plugin<undefined> = {
   name: "user",
+  dependencies: ["prisma"],
   register: async function (server: Hapi.Server) {
     try {
       server.route(USER_ROUTES);

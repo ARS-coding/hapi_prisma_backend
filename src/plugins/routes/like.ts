@@ -17,6 +17,7 @@ const LIKE_ROUTES: ServerRoute[] = [
 
 export const likePlugin: Hapi.Plugin<undefined> = {
   name: "like",
+  dependencies: ["prisma"],
   register: async function (server: Hapi.Server) {
     try {
       server.route(LIKE_ROUTES);

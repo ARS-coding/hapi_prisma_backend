@@ -22,6 +22,7 @@ const POST_ROUTES: ServerRoute[] = [
 
 export const postPlugin: Hapi.Plugin<undefined> = {
   name: "post",
+  dependencies: ["prisma"],
   register: async function (server: Hapi.Server) {
     try {
       server.route(POST_ROUTES);

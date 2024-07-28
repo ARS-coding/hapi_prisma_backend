@@ -17,6 +17,7 @@ const FAVORITE_ROUTES: ServerRoute[] = [
 
 export const favoritePlugin: Hapi.Plugin<undefined> = {
   name: "favorite",
+  dependencies: ["prisma"],
   register: async function (server: Hapi.Server) {
     try {
       server.route(FAVORITE_ROUTES);
