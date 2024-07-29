@@ -11,15 +11,18 @@
     "migrate:save": "prisma migrate --experimental save"
   },
   "dependencies": {
-    "@hapi/basic": "^7.0.2",
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.10",
     "@prisma/client": "5.17.0",
     "bcrypt": "^5.1.1",
-    "joi": "^17.13.3"
+    "hapi-auth-bearer-token": "^8.0.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/hapi-auth-bearer-token": "^6.1.8",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.12",
     "prisma": "^5.17.0",
     "ts-node-dev": "^2.0.0",
