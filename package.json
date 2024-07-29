@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postgres:start": "docker-compose up -d",
     "prisma:generate": "prisma generate",
-    "migrate:save": "prisma migrate --experimental save"
+    "prisma:migrate": "prisma migrate dev",
+    "complete-local-setup": "pnp install &&m pnpm postgres:start && pnpm prisma:generate && pnpm prisma:migrate && pnpm dev"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
