@@ -59,7 +59,7 @@ const USER_ROUTES: ServerRoute[] = [
     handler: UserController.patchUser,
     options: {
       validate: {
-        params: Joi.object({ user_id: Joi.number().max(100) }),
+        params: Joi.object({ user_id: Joi.number().max(100).required() }),
         payload: Joi.object({
           email: Joi.string().email().max(200),
           password: Joi.any().forbidden(), // can't change password, could create a separate endpoint for this change only
