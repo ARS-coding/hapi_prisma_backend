@@ -13,12 +13,17 @@ export async function postPost({ title, content, user_id }: any) {
   });
 }
 
-export function getRecentPosts() {
-  return "getRecentPosts";
+export async function getRecentPosts() {
+  return await prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 3,
+  });
 }
 
 type GetPostArgs = { post_id: number };
-export function getPost({ post_id }: GetPostArgs) {
+export async function getPost({ post_id }: GetPostArgs) {
   try {
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {

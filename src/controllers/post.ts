@@ -10,8 +10,8 @@ export async function postPost(req: Request, h: ResponseToolkit) {
   return await PostService.postPost({ title, content, user_id: req.auth.credentials.user_id as number });
 }
 
-export function getRecentPosts() {
-  //   return PostService.getRecentPosts;
+export async function getRecentPosts() {
+  return await PostService.getRecentPosts();
 }
 
 export function getPost(req: Request, h: ResponseToolkit) {
