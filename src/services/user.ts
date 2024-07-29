@@ -4,7 +4,7 @@ import * as UserDataAccess from "../data-access/user";
 
 import { sign } from "jsonwebtoken";
 function generateAccessToken({ user_id }: { user_id: number }) {
-  const access_token = sign({ id: user_id }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+  const access_token = sign({ user_id }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
   return { access_token };
 }
 
