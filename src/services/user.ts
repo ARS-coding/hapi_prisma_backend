@@ -35,12 +35,6 @@ export async function signIn({ email, password }: SignInArguments) {
   return generateAccessToken({ user_id: user.id });
 }
 
-type SignOutArguments = {
-  email: string;
-  password: string;
-};
-export async function signOut({ email, password }: SignOutArguments) {}
-
 type GetUserArguments = {
   user_id: string;
 };

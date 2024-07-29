@@ -21,10 +21,6 @@ export async function signIn(req: Request, h: ResponseToolkit) {
   return { access_token };
 }
 
-export async function signOut(req: Request, h: ResponseToolkit) {
-  //   return UserService.signOut;
-}
-
 export async function getUser(req: Request, h: ResponseToolkit) {
   type ExpectedRequestParams = { user_id: string };
   const { user_id } = req.params as ExpectedRequestParams;
