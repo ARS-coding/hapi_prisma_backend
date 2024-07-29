@@ -1,21 +1,89 @@
+import bcrypt from "bcrypt";
+import { Prisma } from "@prisma/client";
+import Boom from "@hapi/boom";
+
 import { prisma } from "../prisma";
 
-export function createUser(firstName: string, lastName: string, email: string, password: string) {
-  return "signUp";
+type CreateUserArguments = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
+export async function createUser({ email, password, firstName, lastName }: CreateUserArguments) {
+  try {
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: encryptedPassword,
+        firstName,
+        lastName,
+      },
+    });
+
+    return user;
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2002") {
+        throw Boom.badRequest("There is a unique constraint violation, a new user cannot be created with this email.");
+      }
+    }
+
+    throw Boom.badImplementation("Unknown error at createUser data-access layer.");
+  }
 }
 
-export function getUserById(user_id: string) {
-  return "getUser";
+type GetUserByIdArguments = {
+  user_id: string;
+};
+export async function getUserById({ user_id }: GetUserByIdArguments) {
+  try {
+    const user = await prisma.user.findUniqueOrThrow({
+      where: {
+        id: Number(user_id),
+      },
+    });
+
+    return user;
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2025") {
+        throw Boom.badRequest("Couldn't find a user with the given id.");
+      }
+    }
+
+    throw err;
+  }
 }
 
-export function getUserByEmail(user_id: string) {
-  return "getUser";
+type GetUserByEmailArguments = {
+  email: string;
+};
+export async function getUserByEmail({ email }: GetUserByEmailArguments) {
+  try {
+    const user = prisma.user.findUniqueOrThrow({
+      where: {
+        email,
+      },
+    });
+
+    return user;
+  } catch (err) {
+    throw err;
+  }
 }
 
-export function patchUser(user_id: string) {
+type PatchUserArguments = {
+  user_id: string;
+};
+export async function patchUser({ user_id }: PatchUserArguments) {
   return "patchUser";
 }
 
-export function deleteUser(user_id: string) {
+type DeleteUserArguments = {
+  user_id: string;
+};
+export async function deleteUser({ user_id }: DeleteUserArguments) {
   return "deleteUser";
 }

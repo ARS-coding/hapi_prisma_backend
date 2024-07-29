@@ -1,23 +1,63 @@
+import bcrypt from "bcrypt";
+import Boom from "@hapi/boom";
 import * as UserDataAccess from "../data-access/user";
 
-export function signUp(firstName: string, lastName: string, email: string, password: string) {
-  //   return UserDataAccess.createUser
+import { sign } from "jsonwebtoken";
+function generateAccessToken({ user_id }: { user_id: number }) {
+  const access_token = sign({ id: user_id }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+  return { access_token };
 }
 
-export function signIn(email: string, password: string) {
-  //   return UserDataAccess.getUserByEmail
+type SignUpArguments = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
+export async function signUp({ email, password, firstName, lastName }: SignUpArguments) {
+  const createdUser = await UserDataAccess.createUser({ email, password, firstName, lastName });
+
+  return generateAccessToken({ user_id: createdUser.id });
 }
 
-export function signOut(email: string, password: string) {}
+type SignInArguments = {
+  email: string;
+  password: string;
+};
+export async function signIn({ email, password }: SignInArguments) {
+  const user = await UserDataAccess.getUserByEmail({ email });
 
-export function getUser(user_id: string) {
-  //   return UserDataAccess.getUserById
+  const isValidPassword = await bcrypt.compare(password, user.password);
+  if (!isValidPassword) {
+    throw Boom.badRequest("Given password for user with the specific email was incorrect.");
+  }
+
+  return generateAccessToken({ user_id: user.id });
 }
 
-export function patchUser(user_id: string) {
+type SignOutArguments = {
+  email: string;
+  password: string;
+};
+export async function signOut({ email, password }: SignOutArguments) {}
+
+type GetUserArguments = {
+  user_id: string;
+};
+export async function getUser({ user_id }: GetUserArguments) {
+  return UserDataAccess.getUserById({ user_id });
+}
+
+type PatchUserArguments = {
+  user_id: string;
+};
+export async function patchUser({ user_id }: PatchUserArguments) {
   //   return UserDataAccess.patchUser
 }
 
-export function deleteUser(user_id: string) {
+type DeleteUserArguments = {
+  user_id: string;
+};
+export async function deleteUser({ user_id }: DeleteUserArguments) {
   //   return UserDataAccess.deleteUser
 }
