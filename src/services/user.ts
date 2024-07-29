@@ -39,14 +39,15 @@ type GetUserArguments = {
   user_id: string;
 };
 export async function getUser({ user_id }: GetUserArguments) {
-  return UserDataAccess.getUserById({ user_id });
+  return await UserDataAccess.getUserById({ user_id });
 }
 
-type PatchUserArguments = {
-  user_id: string;
-};
-export async function patchUser({ user_id }: PatchUserArguments) {
-  //   return UserDataAccess.patchUser
+export async function patchUser({ userFieldsToOverride, user_id, userToBeChangedId }: any) {
+  if (!(user_id == userToBeChangedId)) {
+    throw Boom.badRequest("User only can change their own user details.");
+  }
+
+  return await UserDataAccess.patchUser({ userFieldsToOverride, userToBeChangedId });
 }
 
 type DeleteUserArguments = {

@@ -1,7 +1,7 @@
 import Hapi, { Request, ResponseToolkit } from "@hapi/hapi";
 
 import * as UserService from "../services/user";
-// use joi to validate the schema, look into doing that in the route creating option part instead of on the controller
+import { prisma } from "../prisma";
 
 export async function signUp(req: Request, h: ResponseToolkit) {
   type ExpectedRequestPayload = { email: string; password: string; firstName: string; lastName: string };
@@ -25,11 +25,11 @@ export async function getUser(req: Request, h: ResponseToolkit) {
   type ExpectedRequestParams = { user_id: string };
   const { user_id } = req.params as ExpectedRequestParams;
 
-  return UserService.getUser({ user_id });
+  return await UserService.getUser({ user_id });
 }
 
 export async function patchUser(req: Request, h: ResponseToolkit) {
-  //   return UserService.patchUser;
+  return await UserService.patchUser({ userFieldsToOverride: req.payload, user_id: req.auth.credentials.user_id, userToBeChangedId: req.params.user_id });
 }
 
 export async function deleteUser(req: Request, h: ResponseToolkit) {

@@ -46,7 +46,7 @@ const USER_ROUTES: ServerRoute[] = [
     handler: UserController.getUser,
     options: {
       validate: {
-        params: Joi.object({ user_id: Joi.string().max(100) }),
+        params: Joi.object({ user_id: Joi.number().max(100) }),
         failAction: (req, h, err) => {
           throw err;
         },
@@ -59,7 +59,13 @@ const USER_ROUTES: ServerRoute[] = [
     handler: UserController.patchUser,
     options: {
       validate: {
-        params: Joi.object({ user_id: Joi.string().max(100) }),
+        params: Joi.object({ user_id: Joi.number().max(100) }),
+        payload: Joi.object({
+          email: Joi.string().email().max(200),
+          password: Joi.any().forbidden(), // can't change password, could create a separate endpoint for this change only
+          firstName: Joi.string().max(100),
+          lastName: Joi.string().max(100),
+        }),
         failAction: (req, h, err) => {
           throw err;
         },

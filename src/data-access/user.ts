@@ -62,7 +62,7 @@ type GetUserByEmailArguments = {
 };
 export async function getUserByEmail({ email }: GetUserByEmailArguments) {
   try {
-    const user = prisma.user.findUniqueOrThrow({
+    const user = await prisma.user.findUniqueOrThrow({
       where: {
         email,
       },
@@ -74,11 +74,17 @@ export async function getUserByEmail({ email }: GetUserByEmailArguments) {
   }
 }
 
-type PatchUserArguments = {
-  user_id: string;
-};
-export async function patchUser({ user_id }: PatchUserArguments) {
-  return "patchUser";
+export async function patchUser({ userFieldsToOverride, userToBeChangedId }: any) {
+  try {
+    return await prisma.user.update({
+      where: {
+        id: userToBeChangedId,
+      },
+      data: userFieldsToOverride,
+    });
+  } catch (err) {
+    throw err;
+  }
 }
 
 type DeleteUserArguments = {
