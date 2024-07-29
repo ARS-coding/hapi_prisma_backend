@@ -11,7 +11,7 @@ Backend kısmını deploy edemediğimden ötürü frontend kısmını da etmedim
 
 - Node versiyonumuz v20.15.1'dir. nvm install v20.15.1 && nvm use v20.15.1 aracılığıyla bu versiyonu kullanabilirsiniz.
 - pnpm complete-local-setup vasıtasıyla görüntüleyebilirsiniz. Lütfen scripti çalıştırmadan önce docker daemonunuzun çalıştığından emin olunuz.
-- pnpm prisma:studio sayesinde http://localhost:5555'taki dockerda çalışan PostgreSQL veritabanının tablolarını basit bir web arayüzü arayıcılığıyla inceleyebilir ve belirli verileri manuel olarak da değiştirebilirsiniz.
+- pnpm prisma:studio sayesinde http://localhost:5555 linkinde docker içinde çalışan PostgreSQL veritabanının tablolarını basit bir web arayüzü arayıcılığıyla inceleyebilir ve belirli verileri manuel olarak da değiştirebilirsiniz.
 - http://localhost:3001/docs aracılığıyla swagger dokümantasyonunu görebilirsiniz.
 
 ## app_nation_case_study_backend
