@@ -1,4 +1,5 @@
 import Hapi, { ServerRoute } from "@hapi/hapi";
+import Joi from "joi";
 
 import * as PostController from "../../controllers/post";
 
@@ -7,6 +8,14 @@ const POST_ROUTES: ServerRoute[] = [
     method: "POST",
     path: "/post",
     handler: PostController.postPost,
+    options: {
+      validate: {
+        payload: Joi.object({
+          title: Joi.string().max(200).required(),
+          content: Joi.string().max(500).required(),
+        }),
+      },
+    },
   },
   {
     method: "GET",
