@@ -70,6 +70,12 @@ export async function getUserByEmail({ email }: GetUserByEmailArguments) {
 
     return user;
   } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2025") {
+        throw Boom.badRequest("Couldn't find a user with the given email.");
+      }
+    }
+
     throw err;
   }
 }
@@ -83,14 +89,30 @@ export async function patchUser({ userFieldsToOverride, userToBeChangedId }: any
       data: userFieldsToOverride,
     });
   } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2025") {
+        throw Boom.badRequest("Couldn't find a user with the given id.");
+      }
+    }
+
     throw err;
   }
 }
 
 export async function deleteUser({ userToBeDeletedId }: any) {
-  return await prisma.user.delete({
-    where: {
-      id: userToBeDeletedId,
-    },
-  });
+  try {
+    return await prisma.user.delete({
+      where: {
+        id: userToBeDeletedId,
+      },
+    });
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2025") {
+        throw Boom.badRequest("Couldn't find a user with the given id.");
+      }
+    }
+
+    throw err;
+  }
 }
