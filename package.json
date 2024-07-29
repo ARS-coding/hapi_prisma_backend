@@ -11,7 +11,8 @@
     "postgres:start": "docker-compose up -d",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "complete-local-setup": "pnp install &&m pnpm postgres:start && pnpm prisma:generate && pnpm prisma:migrate && pnpm dev"
+    "prisma:studio": "prisma studio",
+    "complete-local-setup": "pnp install &&m pnpm postgres:start && pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:studio && pnpm dev"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
