@@ -2,6 +2,7 @@ import Hapi from "@hapi/hapi";
 
 import * as plugins from "./plugins";
 import { setAuth } from "./auth";
+import { setSwagger } from "./swagger";
 
 const server = Hapi.server({
   port: Number(process.env.PORT) || 3001,
@@ -25,6 +26,9 @@ export async function initializeServer() {
 
     await setAuth(server);
     console.log("Authentication got successfully set up!");
+
+    await setSwagger(server);
+    console.log("Swagger got successfully set up!");
 
     await startServer();
     console.log("Server started running!");
