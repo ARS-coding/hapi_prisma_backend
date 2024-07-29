@@ -1,19 +1,18 @@
-import { Request, ResponseToolkit } from "@hapi/hapi";
-import bcrypt from "bcrypt";
+import { Request, ResponseToolkit, Server } from "@hapi/hapi";
+import authPlugin from "hapi-auth-bearer-token";
+import { verify, JwtPayload } from "jsonwebtoken";
 
-import { prisma } from "./prisma";
+export async function validate(request: Request, token: string, h: ResponseToolkit) {
+  const { user_id, exp } = verify(token, process.env.JWT_SECRET as string) as { user_id: number; exp: number };
+  const notExpired = Math.floor(Date.now() / 1000) < exp;
 
-export async function validate(request: Request, email: string, password: string, h: ResponseToolkit) {
-  const user = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
-  if (!user) {
-    return { credentials: null, isValid: false };
-  }
+  return { isValid: notExpired, credentials: { user_id } };
+}
 
-  const isValid = await bcrypt.compare(password, user.password);
-  const credentials = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email };
-  return { isValid, credentials };
+export async function setAuth(server: Server) {
+  await server.register(authPlugin); // register basic auth as plugin before setting server auth configurations
+  server.auth.strategy("simple", "bearer-access-token", { validate });
+  server.auth.default("simple");
+
+  return server;
 }

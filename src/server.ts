@@ -1,24 +1,15 @@
 import Hapi from "@hapi/hapi";
-import authPlugin from "@hapi/basic";
 
 import * as plugins from "./plugins";
-import { validate } from "./auth";
+import { setAuth } from "./auth";
 
 const server = Hapi.server({
-  port: process.env.PORT || 3000,
+  port: Number(process.env.PORT) || 3000,
   host: process.env.HOST || "localhost",
 });
 
 async function registerServerPlugins() {
   await server.register(Object.values(plugins));
-  return server;
-}
-
-async function setAuth() {
-  await server.register(authPlugin); // register basic auth as plugin before setting server auth configurations
-  server.auth.strategy("simple", "basic", { validate });
-  server.auth.default("simple");
-
   return server;
 }
 
@@ -32,7 +23,7 @@ export async function initializeServer() {
     await registerServerPlugins();
     console.log("Server plugins registered!");
 
-    await setAuth();
+    await setAuth(server);
     console.log("Authentication got successfully set up!");
 
     await startServer();
