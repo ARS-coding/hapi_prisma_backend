@@ -1,8 +1,8 @@
-import { Request, ResponseToolkit, Server } from "@hapi/hapi";
+import { Request, Server } from "@hapi/hapi";
 import authPlugin from "hapi-auth-bearer-token";
 import { verify, JwtPayload } from "jsonwebtoken";
 
-export async function validate(request: Request, token: string, h: ResponseToolkit) {
+export async function validate(request: Request, token: string) {
   const { user_id, exp } = verify(token, process.env.JWT_SECRET as string) as { user_id: number; exp: number };
   const notExpired = Math.floor(Date.now() / 1000) < exp;
 
