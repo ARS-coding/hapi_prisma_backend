@@ -33,5 +33,5 @@ export async function patchUser(req: Request, h: ResponseToolkit) {
 }
 
 export async function deleteUser(req: Request, h: ResponseToolkit) {
-  //   return UserService.deleteUser;
+  return await UserService.deleteUser({ userToBeDeletedId: req.params.user_id, user_id: req.auth.credentials.user_id });
 }

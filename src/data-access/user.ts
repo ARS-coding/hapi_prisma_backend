@@ -87,9 +87,10 @@ export async function patchUser({ userFieldsToOverride, userToBeChangedId }: any
   }
 }
 
-type DeleteUserArguments = {
-  user_id: string;
-};
-export async function deleteUser({ user_id }: DeleteUserArguments) {
-  return "deleteUser";
+export async function deleteUser({ userToBeDeletedId }: any) {
+  return await prisma.user.delete({
+    where: {
+      id: userToBeDeletedId,
+    },
+  });
 }

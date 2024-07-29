@@ -50,9 +50,10 @@ export async function patchUser({ userFieldsToOverride, user_id, userToBeChanged
   return await UserDataAccess.patchUser({ userFieldsToOverride, userToBeChangedId });
 }
 
-type DeleteUserArguments = {
-  user_id: string;
-};
-export async function deleteUser({ user_id }: DeleteUserArguments) {
-  //   return UserDataAccess.deleteUser
+export async function deleteUser({ userToBeDeletedId, user_id }: any) {
+  if (!(userToBeDeletedId == user_id)) {
+    throw Boom.badRequest("Users can't delete other users.");
+  }
+
+  return await UserDataAccess.deleteUser({ userToBeDeletedId });
 }

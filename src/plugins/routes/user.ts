@@ -78,7 +78,7 @@ const USER_ROUTES: ServerRoute[] = [
     handler: UserController.deleteUser,
     options: {
       validate: {
-        params: Joi.object({ user_id: Joi.string().max(100) }),
+        params: Joi.object({ user_id: Joi.number().max(100).required() }),
         failAction: (req, h, err) => {
           throw err;
         },
