@@ -22,15 +22,20 @@ export async function getRecentPosts() {
   });
 }
 
-type GetPostArgs = { post_id: number };
-export async function getPost({ post_id }: GetPostArgs) {
+export async function getPost({ post_id }: { post_id: number }) {
   try {
+    return await prisma.post.findUniqueOrThrow({
+      where: {
+        id: post_id,
+      },
+    });
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
       if (err.code === "P2025") {
         throw Boom.badRequest("Couldn't find a post with the given id.");
       }
     }
+    console.log("SADKJGFDASKJH", err);
+    throw err;
   }
-  return "getPost";
 }

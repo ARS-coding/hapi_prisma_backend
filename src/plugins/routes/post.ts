@@ -26,6 +26,13 @@ const POST_ROUTES: ServerRoute[] = [
     method: "GET",
     path: "/post/{post_id}",
     handler: PostController.getPost,
+    options: {
+      validate: {
+        params: Joi.object({
+          post_id: Joi.number().max(100),
+        }),
+      },
+    },
   },
 ];
 

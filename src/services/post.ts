@@ -8,6 +8,6 @@ export async function getRecentPosts() {
   return await PostDataAccess.getRecentPosts();
 }
 
-export function getPost(user_id: string) {
-  //   return PostDataAccess.getPost
+export async function getPost({ post_id }: { post_id: string }) {
+  return await PostDataAccess.getPost({ post_id: Number(post_id) });
 }

@@ -14,6 +14,7 @@ export async function getRecentPosts() {
   return await PostService.getRecentPosts();
 }
 
-export function getPost(req: Request, h: ResponseToolkit) {
-  //   return PostService.getPost;
+export async function getPost(req: Request, h: ResponseToolkit) {
+  const { post_id } = req.params as { post_id: string };
+  return await PostService.getPost({ post_id });
 }
