@@ -4,22 +4,30 @@ import Boom from "@hapi/boom";
 import { prisma } from "../prisma";
 
 export async function postPost({ title, content, user_id }: any) {
-  return await prisma.post.create({
-    data: {
-      userId: user_id,
-      title,
-      content,
-    },
-  });
+  try {
+    return await prisma.post.create({
+      data: {
+        userId: user_id,
+        title,
+        content,
+      },
+    });
+  } catch (error) {
+    throw Boom.badImplementation("Unknown error at postPost data-access layer.");
+  }
 }
 
 export async function getRecentPosts() {
-  return await prisma.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 3,
-  });
+  try {
+    return await prisma.post.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 3,
+    });
+  } catch (error) {
+    throw Boom.badImplementation("Unknown error at getRecentPosts data-access layer.");
+  }
 }
 
 export async function getPost({ post_id }: { post_id: number }) {
@@ -35,7 +43,7 @@ export async function getPost({ post_id }: { post_id: number }) {
         throw Boom.badRequest("Couldn't find a post with the given id.");
       }
     }
-    console.log("SADKJGFDASKJH", err);
-    throw err;
+
+    throw Boom.badImplementation("Unknown error at getPost data-access layer.");
   }
 }

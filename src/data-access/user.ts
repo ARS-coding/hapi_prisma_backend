@@ -53,7 +53,7 @@ export async function getUserById({ user_id }: GetUserByIdArguments) {
       }
     }
 
-    throw err;
+    throw Boom.badImplementation("Unknown error at createUser data-access layer.");
   }
 }
 
@@ -76,7 +76,7 @@ export async function getUserByEmail({ email }: GetUserByEmailArguments) {
       }
     }
 
-    throw err;
+    throw Boom.badImplementation("Unknown error at getUserByEmail data-access layer.");
   }
 }
 
@@ -95,7 +95,7 @@ export async function patchUser({ userFieldsToOverride, userToBeChangedId }: any
       }
     }
 
-    throw err;
+    throw Boom.badImplementation("Unknown error at patchUser data-access layer.");
   }
 }
 
@@ -113,6 +113,6 @@ export async function deleteUser({ userToBeDeletedId }: any) {
       }
     }
 
-    throw err;
+    throw Boom.badImplementation("Unknown error at deleteUser data-access layer.");
   }
 }
