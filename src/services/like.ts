@@ -1,10 +1,9 @@
 import * as LikeDataAccess from "../data-access/like";
-// use joi to validate the schema, look into doing that in the route creating option part instead of on the controller
 
-export function like(post_id: string, user_id: string) {
-  //   return LikeDataAccess.createLike;
+export async function like({ post_id, user_id }: any) {
+  return await LikeDataAccess.createLike({ post_id: Number(post_id), user_id: Number(user_id) });
 }
 
-export function unlike(post_id: string, user_id: string) {
-  //   return LikeDataAccess.deleteLike;
+export async function unlike({ post_id, user_id }: any) {
+  return await LikeDataAccess.deleteLike({ post_id: Number(post_id), user_id: Number(user_id) });
 }
