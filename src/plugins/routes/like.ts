@@ -7,11 +7,17 @@ const LIKE_ROUTES: ServerRoute[] = [
     method: "POST",
     path: "/like/{post_id}",
     handler: LikeController.like,
+    options: {
+      tags: ["api"],
+    },
   },
   {
     method: "DELETE",
     path: "/like/unlike/{post_id}",
     handler: LikeController.unlike,
+    options: {
+      tags: ["api"],
+    },
   },
 ];
 

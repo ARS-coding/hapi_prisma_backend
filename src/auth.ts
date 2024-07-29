@@ -1,6 +1,6 @@
 import { Request, Server } from "@hapi/hapi";
 import authPlugin from "hapi-auth-bearer-token";
-import { verify, JwtPayload } from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 
 export async function validate(request: Request, token: string) {
   const { user_id, exp } = verify(token, process.env.JWT_SECRET as string) as { user_id: number; exp: number };

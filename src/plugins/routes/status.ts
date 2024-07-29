@@ -9,6 +9,7 @@ const STATUS_ROUTES: ServerRoute[] = [
     },
     options: {
       auth: false,
+      tags: ["api"],
     },
   },
 ];

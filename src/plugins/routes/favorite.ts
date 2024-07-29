@@ -7,11 +7,17 @@ const FAVORITE_ROUTES: ServerRoute[] = [
     method: "POST",
     path: "/favorite/{post_id}",
     handler: FavoriteController.favorite,
+    options: {
+      tags: ["api"],
+    },
   },
   {
     method: "DELETE",
     path: "/favorite/unfavorite/{post_id}",
     handler: FavoriteController.unfavorite,
+    options: {
+      tags: ["api"],
+    },
   },
 ];
 

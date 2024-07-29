@@ -21,6 +21,7 @@ const USER_ROUTES: ServerRoute[] = [
           throw err;
         },
       },
+      tags: ["api"],
     },
   },
   {
@@ -38,6 +39,7 @@ const USER_ROUTES: ServerRoute[] = [
           throw err;
         },
       },
+      tags: ["api"],
     },
   },
   {
@@ -51,6 +53,7 @@ const USER_ROUTES: ServerRoute[] = [
           throw err;
         },
       },
+      tags: ["api"],
     },
   },
   {
@@ -70,6 +73,7 @@ const USER_ROUTES: ServerRoute[] = [
           throw err;
         },
       },
+      tags: ["api"],
     },
   },
   {
@@ -83,6 +87,7 @@ const USER_ROUTES: ServerRoute[] = [
           throw err;
         },
       },
+      tags: ["api"],
     },
   },
 ];

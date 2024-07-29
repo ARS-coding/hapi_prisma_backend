@@ -15,12 +15,16 @@ const POST_ROUTES: ServerRoute[] = [
           content: Joi.string().max(500).required(),
         }),
       },
+      tags: ["api"],
     },
   },
   {
     method: "GET",
     path: "/post/recents",
     handler: PostController.getRecentPosts,
+    options: {
+      tags: ["api"],
+    },
   },
   {
     method: "GET",
@@ -32,6 +36,7 @@ const POST_ROUTES: ServerRoute[] = [
           post_id: Joi.number().max(100),
         }),
       },
+      tags: ["api"],
     },
   },
 ];
