@@ -4,6 +4,8 @@
   "description": "AppNation's case study. Monolithic NodeJS backend application using HapiJS and Prisma .",
   "license": "ISC",
   "scripts": {
+    "build": "tsc",
+    "start": "node ./src/index.js",
     "dev": "ts-node-dev --respawn ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postgres:start": "docker-compose up -d",
