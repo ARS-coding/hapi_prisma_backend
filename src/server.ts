@@ -4,7 +4,7 @@ import * as plugins from "./plugins";
 import { setAuth } from "./auth";
 
 const server = Hapi.server({
-  port: Number(process.env.PORT) || 3000,
+  port: Number(process.env.PORT) || 3001,
   host: process.env.HOST || "localhost",
 });
 
